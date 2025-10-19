@@ -4,6 +4,8 @@ _Translate sign language into written words using machine learning._
 
 ---
 
+**Note: this repo does not have git history beacause it was migrated from a private repo**
+
 ## 📖 Overview
 
 **Sign2Text** is a project designed to **build a complete pipeline** for training and deploying a model that **translates sign language gestures into text.**  
