@@ -44,7 +44,7 @@ imension of each LSTM sample).
    1. **Record images** for each sign class using your webcam:
     
     ```bash
-    python src/main.py --script record_images --source webcam
+    uv run python src/main.py --script record_images --source webcam
     ```
     2. **Label the recorded images** using [Label Studio](https://labelstud.io/):
      
@@ -54,12 +54,12 @@ imension of each LSTM sample).
     3. **Train the model** on the labeled dataset:
     
     ```bash
-    python src/main.py --script train
+    uv run uv run python src/main.py --script train
     ```
     4. **Test the model** on test data or live webcam feed:
         
      ```bash
-    python src/main.py --script test --mode test
+    uv run python src/main.py --script test --mode test
     ```
     5. **Run real-time sign recognition** from your webcam:
         
@@ -70,7 +70,7 @@ imension of each LSTM sample).
 3. **The main components can be accessed form main** in [main.py](./main.py):
     
     ```bash
-    python src/main.py --script <component> [additional arguments]
+    uv run python src/main.py --script <component> [additional arguments]
     ```
 
     Where `<component>` can be one of:
