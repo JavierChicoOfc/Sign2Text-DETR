@@ -66,11 +66,9 @@ class SignLanguageLogger:
         self.logger = logging.getLogger(self.name)
         self.logger.setLevel(self.level)
 
-        # Remove existing handlers
         for handler in self.logger.handlers[:]:
             self.logger.removeHandler(handler)
 
-        # Rich handler for console output
         rich_handler = RichHandler(
             console=self.console,
             show_time=True,
@@ -80,16 +78,13 @@ class SignLanguageLogger:
         )
         rich_handler.setLevel(self.level)
 
-        # File handler for persistent logs
         log_file = self.logs_dir / f"{self.name}_{datetime.now().strftime('%Y%m%d')}.log"
         file_handler = logging.FileHandler(log_file)
         file_handler.setLevel(self.level)
 
-        # Create formatter
         formatter = logging.Formatter("%(asctime)s - %(name)s - %(levelname)s - %(message)s")
         file_handler.setFormatter(formatter)
 
-        # Add handlers
         self.logger.addHandler(rich_handler)
         self.logger.addHandler(file_handler)
 
@@ -415,6 +410,7 @@ class SignLanguageLogger:
             TimeElapsedColumn(),
             console=self.console,
         )
+
 
 logger = SignLanguageLogger()
 

@@ -5,15 +5,15 @@ import torch
 from matplotlib import pyplot as plt
 from torch.utils.data import DataLoader
 
-from features.DETR_data.data import DETRData
-from features.model.model import DETR
 from features.boxes.boxes import rescale_bboxes
-from features.logger.logger import get_logger
-from features.rich_handler.rich_handlers import DetectionHandler
 from features.classes.setup import get_classes
+from features.DETR_data.data import DETRData
+from features.logger.logger import get_logger
+from features.model.model import DETR
+from features.rich_handler.rich_handlers import DetectionHandler
 
 
-def run_test_inference(batch_size: int = 4, num_classes: int = 11) -> None:
+def run_test_inference(mode: str = "test", batch_size: int = 4, num_classes: int = 11) -> None:
     """
     Run inference on a test batch and visualize detections.
     Args:
@@ -23,11 +23,11 @@ def run_test_inference(batch_size: int = 4, num_classes: int = 11) -> None:
     logger = get_logger("test")
     detection_handler = DetectionHandler()
     logger.print_banner()
-    test_dataset = DETRData("data/test", train=False)
+    test_dataset = DETRData(f"data/{mode}", train=False)
     test_dataloader = DataLoader(test_dataset, shuffle=True, batch_size=batch_size, drop_last=True)
     model = DETR(num_classes=num_classes)
     model.eval()
-    model.load_pretrained("checkpoints/99_model.pt")
+    model.load_pretrained("checkpoints/560_model.pt")
     X, y = next(iter(test_dataloader))
     logger.test("Running inference on test batch...")
     start_time = time.time()

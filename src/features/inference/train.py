@@ -6,14 +6,15 @@ import torch.nn as nn
 from torch import optim, save
 from torch.utils.data import DataLoader
 
-from features.DETR_data.data import DETRData
-from loss.loss import DETRLoss, HungarianMatcher
-from features.model.model import DETR
 from features.boxes.boxes import stacker
+from features.DETR_data.data import DETRData
 from features.logger.logger import get_logger
+from features.loss import DETRLoss, HungarianMatcher
+from features.model.model import DETR
 from features.rich_handler.rich_handlers import rich_training_context
 
-if __name__ == "__main__":
+
+def train():
     logger = get_logger("training")
     logger.print_banner()
 
@@ -124,8 +125,6 @@ if __name__ == "__main__":
                     X, y = batch
                     try:
                         yhat = model(X)
-                        yhat_classes = yhat["pred_logits"]
-                        yhat_bb = yhat["pred_boxes"]
 
                         loss_dict = criterion(yhat, y)
                         weight_dict = criterion.weight_dict
@@ -183,3 +182,7 @@ if __name__ == "__main__":
                     training_handler.save_checkpoint_status(checkpoint_path, epoch)
 
     save(model.state_dict(), f"checkpoints/{epoch}_model.pt")
+
+
+if __name__ == "__main__":
+    train()

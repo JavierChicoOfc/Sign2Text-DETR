@@ -10,9 +10,9 @@ from PIL import Image
 from torch.utils.data import DataLoader, Dataset
 
 from features.boxes.boxes import rescale_bboxes, stacker
+from features.classes.setup import get_classes
 from features.logger.logger import get_logger
 from features.rich_handler.rich_handlers import DataLoaderHandler
-from features.classes.setup import get_classes
 
 
 class DETRData(Dataset):

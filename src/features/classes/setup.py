@@ -11,7 +11,7 @@ def get_classes() -> Union[List[str], str]:
         str: Error message if loading fails.
     """
     try:
-        with open("src/config.json") as f:
+        with open("src/features/configuration/config.json") as f:
             config = json.load(f)
         classes = config["classes"]
         assert isinstance(classes, list) and len(classes) > 0, (
@@ -31,7 +31,7 @@ def get_colors() -> Union[List[List[int]], str]:
         str: Error message if loading fails.
     """
     try:
-        with open("src/config.json") as f:
+        with open("src/features/configuration/config.json") as f:
             config = json.load(f)
         classes = config["classes"]
         colors = config["colors"]

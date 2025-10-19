@@ -6,10 +6,10 @@ import cv2
 import torch
 from albumentations.pytorch import ToTensorV2
 
-from features.model.model import DETR
-from features.logger.logger import get_logger
-from features.rich_handler.rich_handlers import DetectionHandler
 from features.classes.setup import get_classes, get_colors
+from features.logger.logger import get_logger
+from features.model.model import DETR
+from features.rich_handler.rich_handlers import DetectionHandler
 
 
 def box_cxcywh_to_xyxy(boxes: torch.Tensor) -> torch.Tensor:
@@ -57,7 +57,7 @@ def ensure_color_tuple(c: Tuple[int, int, int]) -> Tuple[int, int, int]:
     return (255, 255, 255)
 
 
-def main() -> None:
+def realtime() -> None:
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     logger = get_logger("realtime")
     detection_handler = DetectionHandler()
@@ -71,13 +71,16 @@ def main() -> None:
         ]
     )
     model = DETR(num_classes=11)
-    model.load_pretrained("checkpoints/970_model.pt")
+    model.load_pretrained("checkpoints/970_model.pt") #56o
     model.to(device)
     model.eval()
     CLASSES = get_classes()
     COLORS = get_colors()
     logger.realtime("Starting camera capture...")
     cap = cv2.VideoCapture(0)
+    window_name = "Frame"
+    cv2.namedWindow(window_name, cv2.WINDOW_NORMAL | cv2.WINDOW_KEEPRATIO)
+    cv2.resizeWindow(window_name, 1080, 810)
     if not cap.isOpened():
         logger.error("Failed to open camera")
         return
@@ -159,4 +162,4 @@ def main() -> None:
 
 
 if __name__ == "__main__":
-    main()
+    realtime()

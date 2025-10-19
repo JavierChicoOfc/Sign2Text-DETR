@@ -4,8 +4,9 @@ import uuid
 from typing import Any, Dict
 
 import cv2
-from logger import logger
-from classes import get_classes
+
+from features.classes import get_classes
+from features.logger import logger
 
 classes = get_classes()
 
