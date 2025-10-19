@@ -93,16 +93,3 @@ Credits are to mention the people who contributed to the project.
 
 
 This project was inspired by [nicknochnack repository](git clone https://github.com/nicknochnack/SignDETR)
-
-
-
-# To run
-
-2. collect images with collect images
-3. Label data with uv run label studio
-4. Train model with train-model
-5. Inference with inference --train or --test
-6. Realtime with realtime
-
-# Credits
-
